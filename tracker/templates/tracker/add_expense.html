@@ -1,0 +1,29 @@
+<!-- add_expense.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Add Expense</h2>
+
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Add Expense</button>
+  </form>
+
+  <h3>Total Expenses: {{ total_expenses }}</h3>
+  {% if user_budget %}
+    <h3>Budget for This Month: {{ user_budget.amount }}</h3>
+  {% else %}
+    <p>No budget set for this month.</p>
+  {% endif %}
+{% endblock %}

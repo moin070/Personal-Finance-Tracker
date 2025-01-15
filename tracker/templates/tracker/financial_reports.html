@@ -1,0 +1,41 @@
+<!-- tracker/templates/tracker/financial_reports.html -->
+
+
+
+{% extends 'base.html' %}
+{% block content %}
+<h1>Financial Reports</h1>
+<canvas id="monthlyChart"></canvas>
+<canvas id="yearlyChart"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
+    const yearlyCtx = document.getElementById('yearlyChart').getContext('2d');
+
+    const monthlyChart = new Chart(monthlyCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Income', 'Expenses'],
+            datasets: [{
+                label: 'Monthly Financials',
+                data: [{{ monthly_income }}, {{ monthly_expenses }}],
+                backgroundColor: ['green', 'red'],
+            }]
+        }
+    });
+
+    const yearlyChart = new Chart(yearlyCtx, {
+        type: 'line',
+        data: {
+            labels: ['Income', 'Expenses'],
+            datasets: [{
+                label: 'Yearly Financials',
+                data: [{{ yearly_income }}, {{ yearly_expenses }}],
+                backgroundColor: 'blue',
+                fill: false,
+            }]
+        }
+    });
+</script>
+{% endblock %}

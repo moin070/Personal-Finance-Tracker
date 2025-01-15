@@ -1,0 +1,65 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h2>Welcome to Your Financial Tracker</h2>
+    <p>Manage your finances efficiently with our tools.</p>
+
+    <!-- Add financial data here -->
+    <h3>Your Incomes</h3>
+    <ul>
+        {% for income in incomes %}
+            <li>
+                <strong>Amount:</strong> {{ income.amount }} Rs
+                <strong>Description:</strong> {{ income.description }}
+                <!-- Link to delete the income -->
+                <a href="{% url 'delete_income' income.id %}" onclick="return confirm('Are you sure you want to delete this income?');">
+                    Delete
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_income' %}">Add Income</a><br><hr>
+
+
+    <h3>Your Expenses</h3>
+    <ul>
+        {% for expense in expenses %}
+            <li>
+                <strong>Description:</strong> {{ expense.description }}
+                <strong>Amount:</strong> {{ expense.amount }} Rs
+                <!-- Link to delete the expense -->
+                <a href="{% url 'delete_expense' expense.id %}">
+                    Delete
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_expense' %}">Add Expense</a><br><hr>
+
+    
+
+    <!-- Navigation links to financial features -->
+    <div class="row">
+        <div class="col-md-6">
+            <a href="{% url 'financial_reports' %}" class="btn btn-primary btn-block">View Financial Reports</a>
+        </div><br><br>
+        <div class="col-md-6">
+            <a href="{% url 'set_budget' %}" class="btn btn-warning btn-block">Set Budget</a>
+        </div><br><br>
+        <div class="col-md-6">
+            <a href="{% url 'export_to_excel' %}" class="btn btn-success btn-block">Export to Excel</a>
+        </div><br><br>
+        <div class="col-md-6">
+            <a href="{% url 'export_to_pdf' %}" class="btn btn-danger btn-block">Export to PDF</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{% endblock %}
