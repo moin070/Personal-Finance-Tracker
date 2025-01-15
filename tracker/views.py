@@ -328,3 +328,6 @@ def set_budget(request):
 # Username (leave blank to use 'smahe'): moin
 # Email address: mkpmoinkhan@gmail.com
 # Password: 1234
+
+
+# git push -u origin main
